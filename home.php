@@ -18,8 +18,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="book.php">Book Your Appointment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="reschedule.php">Reschedule or Cancel Your Appointment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="history.php"></a>Medical History</li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard1.php">Reschedule or Cancel Your Appointment</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.php">Log Out</a></li>
                 </ul>
             </div>

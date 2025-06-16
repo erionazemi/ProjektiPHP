@@ -10,10 +10,10 @@
  <?php
 include_once("config.php");
 
-$sql = "SELECT * FROM pacientat";
+$sql = "SELECT * FROM terminet";
 $getUser = $conn->prepare($sql);
 $getUser->execute();
-$pacientat->fetchAll();
+$terminet = $getUser->fetchAll();
 
  ?>
 
@@ -45,7 +45,7 @@ $pacientat->fetchAll();
     </tbody>
 </table>
         
-      <a href="signup.php">Add user:</a>        
+      <a href="book.php">Book:</a>        
 
 </body>
 </html>
