@@ -4,14 +4,15 @@ include_once("config.php");
 $name = $_POST['name'] ??'';
 $email = $_POST['email'] ?? '';
 
+$pdo = new PDO("mysql:host=localhost; dbname=klinika", "root", "");
 $stmt = $pdo->prepare("SELECT * FROM pacientat WHERE name = ?");
 $stmt->execute([$name]);
-$pacienti = $stmt->fetch();
-if ($pacientat && email_verify($email, $name['email'])) {
-    $_SESSION['name'] = $pacienti['name'];
+$pacientat = $stmt->fetch();
+if ($pacientat && $pacientat === ['email']) {
+    $_SESSION['name'] = $pacientat['name'];
     echo"welcome". htmlspecialchars($pacientat['name']). "!";
 }else{
-    echo "invalid Name or Email.";
+    echo "";
 }
 
 

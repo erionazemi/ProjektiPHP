@@ -36,7 +36,7 @@ $pacientat->fetchAll();
             <td><?= $user['name']?></td>
             <td><?= $user['surname']?></td>
             <td><?= $user['email']?></td>
-            <td><?= "<a href='delete.php?id=$user[id]'>Cancel Appointment</a> | <a href='edit.php?id=$user[id]'>Reschedule Appointment</a>" ?></td>
+            <td><?= "<a href='delete.php?id=$user[id]'>delete</a> | <a href='edit.php?id=$user[id]'>edit </a>" ?></td>
         </tr>
 
        <?php 
@@ -45,7 +45,7 @@ $pacientat->fetchAll();
     </tbody>
 </table>
         
-      <a href="index.php">Add user:</a>        
+      <a href="signup.php">Add user:</a>        
 
 </body>
 </html>

@@ -6,21 +6,19 @@
 	if(isset($_POST['submit']))
 	{
 		$name = $_POST['name'];
-		$username = $_POST['username'];
+		$surname = $_POST['surname'];
 		$email = $_POST['email'];
-		$tempPass = $_POST['password'];
-		$password = password_hash($tempPass, PASSWORD_DEFAULT);
 
-		if(empty($name) || empty($username) || empty($email) || empty($password))
+		if(empty($name) || empty($surname) || empty($email))
 		{
 			echo "You need to fill all the fields.";
 		}
 		else
 		{
-			$sql = "SELECT username FROM users WHERE username=:username";
+			$sql = "SELECT surname FROM pacientat WHERE surname=:surname";
 
 			$tempSQL = $conn->prepare($sql);
-			$tempSQL->bindParam(':username', $username);
+			$tempSQL->bindParam(':surname', $surname);
 			$tempSQL->execute();
 
 			if($tempSQL->rowCount() > 0)
@@ -30,18 +28,17 @@
 			}
 			else
 			{
-				$sql = "insert into users (name, username, email, password) values (:name, :username, :email, :password)";
+				$sql = "insert into pacientat (name, surname, email) values (:name, :surname, :email)";
 				$insertSql = $conn->prepare($sql);
 			
 				$insertSql->bindParam(':name', $name);
-				$insertSql->bindParam(':username', $username);
+				$insertSql->bindParam(':surname', $surname);
 				$insertSql->bindParam(':email', $email);
-				$insertSql->bindParam(':password', $password);
 
 				$insertSql->execute();
 
 				echo "Data saved successfully ...";
-				header( "refresh:2; url=index.php" ); 
+				header( "refresh:2; url=login.php" ); 
 			}
 		}
 	}

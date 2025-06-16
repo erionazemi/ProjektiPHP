@@ -1,0 +1,53 @@
+body {
+    background-image: url(images/doctor.jpg);
+}
+
+header nav h2 {
+    color: rgb(0, 132, 255);
+}
+
+h1 {
+    color: #fff;
+    text-size-adjust: 35px;
+    text-align: center;
+    padding-top: 350px;
+    padding-right: 800px;
+    
+
+}
+
+footer {
+    background-color: rgb(58, 54, 54);
+    text-align: center;
+    position: fixed;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    color: white;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease; 
+}
+
+.card-img-top:hover {
+    transform: translateY(-10px);
+}
+
+
+footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
+
