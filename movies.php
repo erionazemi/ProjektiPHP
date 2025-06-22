@@ -1,21 +1,9 @@
 <?php 
- /*Creating a session  based on a session identifier, passed via a GET or POST request.
-  We will include config.php for connection with database.
-  We will fetch the data from database and show them, and create a form which will allow us to change the datas.
-  */
-	 session_start();
+/*Creating a session  based on a session identifier, passed via a GET or POST request.
+  Creating a form which users will use to give some movie data, then we will post those datas into addMovie.php file
+*/
 
-   include_once('config.php');
-
-   $id = $_GET['id'];
-
-   $sql = "SELECT * FROM movies WHERE id=:id";
-   $selectUser = $conn->prepare($sql);
-   $selectUser->bindParam(':id', $id);
-   $selectUser->execute();
-
-   $user_data = $selectUser->fetch();
-	
+  session_start();
 
  ?>
 
@@ -35,6 +23,12 @@
 	<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
 	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
 	<meta name="theme-color" content="#7952b3">
+
+  <style>
+    #floatingInput{
+      margin: 20px 0px;
+    }
+  </style>
  </head>
  <body>
  
@@ -56,66 +50,75 @@
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
+      <ul class="nav flex-column">
+           <?php if ($_SESSION['is_admin'] == 'true') { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="home.php">
+                <span data-feather="file"></span>
+                Home
+              </a>
+            </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
-         
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="list_movies.php">
+              <span data-feather="file"></span>
+              Doctors
+            </a>
+          </li>
+        <?php } ?>
+          <li class="nav-item">
+            <a class="nav-link" href="bookings.php">
+              <span ></span>
+              Bookings
+            </a>
+          </li>
         </ul>
 
-        
+    
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
-        </div>
+        
       </div>
 
     
 
-      <h2>Edit doctor's details</h2>
-      <div class="table-responsive">
-        
-        <form action="update.php" method="post">
-        <div class="form-floating">
-          <input readonly="readonly" type="text" class="form-control" id="floatingInput" placeholder="id" name="id" value="<?php echo  $user_data['id'] ?>">
-          <label for="floatingInput">ID</label>
-        </div>
+      <h2>Doctors</h2>
+
+       <form action="addMovie.php" method="post">
     
+        
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="movie_name" name="movie_name" value="<?php echo  $user_data['movie_name'] ?>">
-          <label for="floatingInput">Doctor Name</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Name" name="movie_name" >
+          <label for="floatingInput">Doctor name</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Description" name="movie_desc" value="<?php echo  $user_data['movie_desc'] ?>">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Description" name="movie_desc" >
           <label for="floatingInput">Doctor Description</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Quality" name="movie_quality" value="<?php echo  $user_data['movie_quality'] ?>">
-          <label for="floatingInput">Doctor Speciality</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="Quality" name="movie_quality" >
+          <label for="floatingInput">Field</label>
         </div>
         <div class="form-floating">
-          <input type="number" class="form-control" id="floatingInput" placeholder="Movie Rating" name="movie_rating" value="<?php echo  $user_data['movie_rating'] ?>">
-          <label for="floatingInput">Doctor Rating</label>
+          <input type="number" class="form-control" id="floatingInput" placeholder="Rating" name="movie_rating" >
+          <label for="floatingInput">Rating</label>
         </div>
-        <br>
-        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit1">Update</button>
+        <div class="form-floating">
+          <input type="file" class="form-control" id="floatingInput" placeholder="Image" name="movie_image" >
+          <label for="floatingInput">Image</label>
+        </div>
+         <button  class="w-100 btn btn-lg btn-primary" type="submit" name="submit"> Add Doctor </button> 
       </form>
-
-
+      
       </div>
     </main>
   </div>

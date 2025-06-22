@@ -1,45 +1,56 @@
 <?php
+ /*
+  We will include config.php for connection with database.
+  We will get datas from index.php file, and inster them into database when Sign up button is clicked in index.php file.
+  If any of session is empty we will get a message
+  */
 
-	include_once('config.php');	
-
+	include_once('config.php');
 
 	if(isset($_POST['submit']))
 	{
-		$name = $_POST['name'];
-		$surname = $_POST['surname'];
+
+		$emri = $_POST['emri'];
+		$username = $_POST['username'];
 		$email = $_POST['email'];
 
-		if(empty($name) || empty($surname) || empty($email))
+		$tempPass = $_POST['password'];
+		$password = password_hash($tempPass, PASSWORD_DEFAULT);
+
+
+
+		$tempConfirm = $_POST['confirm_password'];
+		$confirm_password = password_hash($tempConfirm, PASSWORD_DEFAULT);
+
+
+		if(empty($emri) || empty($username) || empty($email) || empty($password) || empty($confirm_password))
 		{
-			echo "You need to fill all the fields.";
+			echo "You have not filled in all the fields.";
 		}
 		else
 		{
-			$sql = "SELECT surname FROM pacientat WHERE surname=:surname";
 
-			$tempSQL = $conn->prepare($sql);
-			$tempSQL->bindParam(':surname', $surname);
-			$tempSQL->execute();
+			$sql = "INSERT INTO users(emri,username,email,password, confirm_password) VALUES (:emri, :username, :email, :password, :confirm_password)";
 
-			if($tempSQL->rowCount() > 0)
-			{
-				echo "Username exists!";
-				header( "refresh:2; url=signup.php" ); 
-			}
-			else
-			{
-				$sql = "insert into pacientat (name, surname, email) values (:name, :surname, :email)";
-				$insertSql = $conn->prepare($sql);
+			$insertSql = $conn->prepare($sql);
 			
-				$insertSql->bindParam(':name', $name);
-				$insertSql->bindParam(':surname', $surname);
-				$insertSql->bindParam(':email', $email);
 
-				$insertSql->execute();
+			$insertSql->bindParam(':emri', $emri);
+			$insertSql->bindParam(':username', $username);
+			$insertSql->bindParam(':email', $email);
+			$insertSql->bindParam(':password', $password);
+			$insertSql->bindParam(':confirm_password', $confirm_password);
 
-				echo "Data saved successfully ...";
-				header( "refresh:2; url=login.php" ); 
-			}
+			$insertSql->execute();
+
+			header("Location: login.php");
+
+
 		}
+
+
+
 	}
+
+
 ?>

@@ -3,13 +3,14 @@
   We will include config.php for connection with database.
   We will fetch the data from database and show them, and create a form which will allow us to change the datas.
   */
+
 	 session_start();
 
    include_once('config.php');
 
    $id = $_GET['id'];
 
-   $sql = "SELECT * FROM movies WHERE id=:id";
+   $sql = "SELECT * FROM users WHERE id=:id";
    $selectUser = $conn->prepare($sql);
    $selectUser->bindParam(':id', $id);
    $selectUser->execute();
@@ -62,10 +63,10 @@
               <span data-feather="home"></span>
               Dashboard
             </a>
-         
+          
         </ul>
 
-        
+       
       </div>
     </nav>
 
@@ -86,33 +87,29 @@
 
     
 
-      <h2>Edit doctor's details</h2>
+      <h2>Edit user's details</h2>
       <div class="table-responsive">
         
-        <form action="update.php" method="post">
-        <div class="form-floating">
-          <input readonly="readonly" type="text" class="form-control" id="floatingInput" placeholder="id" name="id" value="<?php echo  $user_data['id'] ?>">
-          <label for="floatingInput">ID</label>
-        </div>
+        <form action="updateUsers.php" method="post">
     
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="movie_name" name="movie_name" value="<?php echo  $user_data['movie_name'] ?>">
-          <label for="floatingInput">Doctor Name</label>
+          <input type="number" class="form-control" id="floatingInput" placeholder="Id" name="id" value="<?php echo  $user_data['id'] ?>">
+          <label for="floatingInput">Id</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Description" name="movie_desc" value="<?php echo  $user_data['movie_desc'] ?>">
-          <label for="floatingInput">Doctor Description</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="Emri" name="emri" value="<?php echo  $user_data['emri'] ?>">
+          <label for="floatingInput">Emri</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Movie Quality" name="movie_quality" value="<?php echo  $user_data['movie_quality'] ?>">
-          <label for="floatingInput">Doctor Speciality</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" value="<?php echo  $user_data['username'] ?>">
+          <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating">
-          <input type="number" class="form-control" id="floatingInput" placeholder="Movie Rating" name="movie_rating" value="<?php echo  $user_data['movie_rating'] ?>">
-          <label for="floatingInput">Doctor Rating</label>
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" value="<?php echo  $user_data['email'] ?>">
+          <label for="floatingInput">Email</label>
         </div>
         <br>
-        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit1">Update</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Change</button>
       </form>
 
 
