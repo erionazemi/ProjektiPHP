@@ -54,7 +54,6 @@
 	</style>
 </head>
 <body class="text-center">
-<!-- Creating a from which will post some data in loginLogic.php file -->
 <main class="form-signin">
   <form action="loginLogic.php" method="post">
     <img class="mb-4" src="movie_images/doctorlogo.png" alt="DoctorLogo" width="72" height="57">
@@ -75,7 +74,7 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Sign in</button>
-	<p>Already have an account:<a href="index.php" >Sign up</a> </p>
+	<p>Dont have an account?:<a href="index.php" >Sign up</a> </p>
   </form>
 </main>
 
